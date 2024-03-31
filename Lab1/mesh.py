@@ -49,12 +49,12 @@ class Mesh:
                 y.append(vertex[1])
 
             curr_area = 0
-            max_z = np.max(y)
+            max_y = np.max(y)
 
             for face in self.faces[i]:
                 if np.min([self.all_vertices[face[0] - 1][1],
                            self.all_vertices[face[1] - 1][1],
-                           self.all_vertices[face[2] - 1][1]]) == max_z:
+                           self.all_vertices[face[2] - 1][1]]) == max_y:
 
                     curr_area += self.area(
                         self.all_vertices[face[0] - 1],
