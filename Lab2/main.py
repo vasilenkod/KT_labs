@@ -33,24 +33,26 @@ k2v = 2.5
 k3m_val = 0.001
 k3v = 0.0032
 
-plt.figure(figsize=(7, 25))
-plt.rc('axes', titlesize=10)
+
 
 y_k = np.linspace(0.001, 0.5, 100)
 
-for i in range(len(k3m_vals)):
-    x_v = x0_func(y_k, k3v, k3m_vals[i])
-    k1_v = k1_sol0_func(y_k, k1m_v, k2v, k3v, k3m_vals[i])
 
-    x_v, y_p, k1_v = zip(*[(x, y, z) for x, y, z in zip(x_v, y_k, k1_v) if 0 <= x <= 1])
+plt.figure(figsize=(7, 25))
+plt.rc('axes', titlesize=10)
+
+for i in range(len(k1m_vals)):
+    x_val = x0_func(y_k, k3v, k3m_val)
+    k1_val = k1_sol0_func(y_k, k1m_vals[i], k2v, k3v, k3m_val)
+
+    x_val, y_p, k1_val = zip(*[(x, y, z) for x, y, z in zip(x_val, y_k, k1_val) if 0 <= x <= 1])
 
     plt.subplot(5, 1, i + 1)
-    plt.plot(k1_v, x_v, label='x(k1)')
-    plt.plot(k1_v, y_p, label='y(k1)')
-    plt.title('k_-3 =' + str(k3m_vals[i]))
+    plt.plot(k1_val, x_val, label='x(k1)')
+    plt.plot(k1_val, y_p, label='y(k1)')
+    plt.title('k_-1 =' + str(k1m_vals[i]))
     plt.legend(['x(k1)', 'y(k1)'])
 
-plt.show()
 
 #Пункт 2: зависимость от k3m
 k1m_v = 0.01
@@ -179,7 +181,7 @@ t = np.linspace(0, 2500, 100000)
 sol = odeint(eval_equation, [0.4, 0.5], t)
 
 plt.figure(figsize=(7, 10))
-plt.rc('axes', titlesize=10)
+plt.rc('axes', titlesize= 10)
 
 plt.subplot(2, 1, 1)
 plt.plot(t, sol[:, 0], color='red', label='x(t)')
